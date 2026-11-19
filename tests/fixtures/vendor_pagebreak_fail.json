@@ -1,0 +1,27 @@
+{
+  "fixture_note": "Anonymized multi-page PDF parse failure: page 2 table break dropped EGRESS_TB ($120.00) row; checksum gate quarantines file and triggers ephemeral Devin Bot heal session.",
+  "parsed_invoice": {
+    "vendor": "acme_cloud_redacted",
+    "invoice_id": "INV-2026-10-XXXX",
+    "items": [
+      {"sku": "COMPUTE_STD_M", "qty": "10", "unit_price": "24.00", "line_total": "240.00"},
+      {"sku": "STORAGE_GB", "qty": "500", "unit_price": "0.10", "line_total": "50.00"}
+    ],
+    "tax": "32.80",
+    "credits": "10.00",
+    "total": "432.80"
+  },
+  "contract_rates": {
+    "COMPUTE_STD_M": "24.00",
+    "STORAGE_GB": "0.10",
+    "EGRESS_TB": "40.00"
+  },
+  "prev_total": "418.00",
+  "scrubbed_error_log": [
+    "2026-11-01T04:00:12Z INFO  adapter=acme_cloud profile=billing_only_01 auth=TOTP_OK [COOKIES_REDACTED]",
+    "2026-11-01T04:00:15Z INFO  pdf_pages=2 parser=pdfplumber_v2",
+    "2026-11-01T04:00:16Z ERROR ChecksumError: parsed=312.80 vs footer=432.80 (delta=120.00 missing across page break)",
+    "2026-11-01T04:00:16Z WARN  quarantined=r2://quarantine/INV-2026-10-XXXX.pdf secrets_scrubbed=true",
+    "2026-11-01T04:00:17Z INFO  dispatch_devin_bot vendor=acme_cloud max_steps=15 max_retries=2 pr_checks=pytest,gitleaks"
+  ]
+}
